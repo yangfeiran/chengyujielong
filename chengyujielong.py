@@ -18,7 +18,11 @@ def get_all_starts_with(letter):
     result = []
     target_pinyin = pinyin(letter, heteronym=False,style=Style.TONE3)
     print target_pinyin
-    target_pinyin_last = target_pinyin[-1]
+    try:
+        target_pinyin_last = target_pinyin[-1]
+    except IndexError,e:
+        print("input is empty!")
+        return None
     for i in data:
         data_word = i[0]
         data_pinyin = i[1]
@@ -43,7 +47,7 @@ def format_data(data):
         return 'none match!'
 
 def init():
-    with open("data.txt", "r") as f:
+    with open("/Users/feiran/Desktop/data.txt", "r") as f:
         counter = 0
         for line in f:
             content = line.decode("UTF-8").split("\t")
